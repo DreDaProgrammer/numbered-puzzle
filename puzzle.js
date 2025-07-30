@@ -1,4 +1,5 @@
 // puzzle.js
+import { find1and2 } from "./steps/find1and2.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   const gridSize = 4; // 4×4 puzzle
@@ -54,6 +55,12 @@ window.addEventListener("DOMContentLoaded", () => {
       startRound();
     });
     startRound();
+    const findBtn = document.getElementById("findBtn");
+
+    findBtn.addEventListener("click", () => {
+      const message = find1and2(tiles);
+      alert(message); // ✅ shows exact positions in a pop-up
+    });
   }
 
   // 3) Start or reset a round (shuffled)
@@ -109,6 +116,10 @@ window.addEventListener("DOMContentLoaded", () => {
       render();
     }
   }
+
+  const positions = find1and2(tiles);
+  console.log("Tile 1 is at:", positions.tile1);
+  console.log("Tile 2 is at:", positions.tile2);
 
   // 7) On solve → show name and auto‑advance
   function checkWin() {
